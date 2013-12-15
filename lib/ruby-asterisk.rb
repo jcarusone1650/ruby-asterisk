@@ -75,8 +75,12 @@ module RubyAsterisk
       execute 'Status', {'Channel' => channel, 'ActionID' => action_id}
     end
 
-    def originate(caller, context, callee, priority, variable = nil)
-      execute 'Originate', {'Channel' => caller, 'Context' => context, 'Exten' => callee, 'Priority' => priority, 'Callerid' => caller, 'Timeout' => '30000', 'Variable' => variable  }
+    def originate(caller, context, callee, priority, callerid, timeout, variable = nil)
+      execute 'Originate', {'Channel' => caller, 'Context' => context, 'Exten' => callee, 'Priority' => priority, 'Callerid' => callerid, 'Timeout' => timeout, 'Variable' => variable  }
+    end
+
+    def queue_originate(channel, context, async, application, data, callerid, variable = nil)
+      execute 'Originate', {'Channel' => channel, 'Context' => context, 'Async' => async, 'Application' => application, 'Data' => data, 'Callerid' => callerid, 'Variable' => variable  }
     end
 
     def channels
